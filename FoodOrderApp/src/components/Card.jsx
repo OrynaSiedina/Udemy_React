@@ -1,6 +1,6 @@
 import React from 'react'
 import { priceFormater } from '../utils/priceFormater'
-
+import Button from './UI/Button'
 const Card = ({meal}) => {
   return (
     <li className="meal-item">
@@ -11,7 +11,7 @@ const Card = ({meal}) => {
         <p className='meal-item-price'>{priceFormater.format(meal.price)}</p>
         <p className='meal-item-description'>{meal.description}</p>
       </div>
-        <button className='meal-item-actions'>Add to Cart</button>
+        <Button className='meal-item-actions'>Add to Cart</Button>
       </article>
     </li>
   )
