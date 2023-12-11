@@ -1,7 +1,17 @@
 import React from 'react'
 import { priceFormater } from '../utils/priceFormater'
 import Button from './UI/Button'
+import { CartContext } from './store/CartContext'
+import { useContext } from 'react'
+
 const Card = ({meal}) => {
+
+  const cartCxt = useContext(CartContext)
+
+  function handleAddToCart() {
+    cartCxt.addItem(meal)
+  }
+
   return (
     <li className="meal-item">
       <article>
@@ -11,7 +21,7 @@ const Card = ({meal}) => {
         <p className='meal-item-price'>{priceFormater.format(meal.price)}</p>
         <p className='meal-item-description'>{meal.description}</p>
       </div>
-        <Button className='meal-item-actions'>Add to Cart</Button>
+        <Button onClick={handleAddToCart}className='meal-item-actions'>Add to Cart</Button>
       </article>
     </li>
   )
