@@ -11,7 +11,7 @@ const Checkout = () => {
     userCxt.hideCheckout();
   }
   return (
-    <Modal open={userCxt.progress === "checkout"}>
+    <Modal open={userCxt.progress === "checkout"} onClose={handleClose}>
       <form action="">
         <h2>Checkout</h2>
         <p>Total Amount: {priceFormater.format(cartTotal(cartCtx))} </p>

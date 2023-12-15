@@ -9,7 +9,7 @@ const Cart = () => {
   const cartCtx = useContext(CartContext);
   const userProgressCtx = useContext(UserProgressContext);
   
-  function closeCartHandler() {
+  function handleCloseCart() {
     userProgressCtx.hideCart();
   }
 
@@ -18,7 +18,7 @@ const Cart = () => {
   }
 
   return (
-    <Modal className="cart" open={userProgressCtx.progress === "cart"}>
+    <Modal className="cart" open={userProgressCtx.progress === "cart"} onClose={userProgressCtx.progress === "cart"?handleCloseCart:null}>
       <h2>Your Cart</h2>
       <ul>
         {cartCtx.items.map((item) => (
@@ -32,7 +32,7 @@ const Cart = () => {
       </ul>
       <p className="cart-total">{priceFormater.format(cartTotal(cartCtx))}</p>
       <p className="modal-actions">
-        <Button textOnly onClick={closeCartHandler}>
+        <Button textOnly onClick={handleCloseCart}>
           Close
         </Button>
         {cartCtx.items.length>0 && <Button onClick={handleGoToCheckout}>Go to Checkout</Button>}
