@@ -4,15 +4,17 @@ import { Button, Modal } from "./UI";
 import { UserProgressContext } from "./store/UserProgress";
 import { CartContext } from "./store/CartContext";
 import CartItem from "./CartItem";
+import { cartTotal } from "../utils/cartTotal";
 const Cart = () => {
   const cartCtx = useContext(CartContext);
   const userProgressCtx = useContext(UserProgressContext);
-  const cartTotal = cartCtx.items.reduce((totalPrice, item) => {
-    return totalPrice + item.quantity * item.price;
-  }, 0);
-
+  
   function closeCartHandler() {
     userProgressCtx.hideCart();
+  }
+
+  function handleGoToCheckout() {
+    userProgressCtx.showCheckout();
   }
 
   return (
@@ -28,12 +30,12 @@ const Cart = () => {
           />
         ))}
       </ul>
-      <p className="cart-total">{priceFormater.format(cartTotal)}</p>
+      <p className="cart-total">{priceFormater.format(cartTotal(cartCtx))}</p>
       <p className="modal-actions">
         <Button textOnly onClick={closeCartHandler}>
           Close
         </Button>
-        <Button>Go to Checkout</Button>
+        {cartCtx.items.length>0 && <Button onClick={handleGoToCheckout}>Go to Checkout</Button>}
       </p>
     </Modal>
   );
